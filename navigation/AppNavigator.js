@@ -2,14 +2,14 @@ import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 
-import AllGamesScreen from '../screens/AllGamesScreen';
-import GameScreen from '../screens/GameScreen';
-import SubmitTeamScreen from '../screens/SubmitTeamScreen';
+import AllGamesScreen from '../screens/games/AllGamesScreen';
+import GameScreen from '../screens/games/GameScreen';
+import SubmitTeamScreen from '../screens/games/SubmitTeamScreen';
 import KycScreen from '../screens/KycScreen';
-import PredictionScreen from '../screens/PredictionScreen';
+import PredictionScreen from '../screens/prediction/PredictionScreen';
 import WalletScreen from '../screens/WalletScreen';
-import MyGamesScreen from '../screens/MyGamesScreen';
-import MyPredictionScreen from '../screens/MyPredictionScreen';
+import MyGamesScreen from '../screens/myarena/MyGamesScreen';
+import MyPredictionScreen from '../screens/myarena/MyPredictionScreen';
 import NonFrequentScreen from '../screens/NonFrequentScreen';
 
 
