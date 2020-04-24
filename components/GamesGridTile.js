@@ -7,8 +7,9 @@ const GamesGridTile = props => {
         <View style= {styles.outercontainer}>
         <View style={styles.container}>
             <Text>{props.title}</Text>
-            <Text>{props.curr}/{props.max}</Text>
-            <Text>{props.closesAt}</Text>
+            <Text>{props.matches}, {props.series}</Text>
+            <Text>Participants {props.curr}/{props.max}</Text>
+            <Text>{props.closeDisplay}</Text>
         </View>
         </View>
         </View>

@@ -10,9 +10,11 @@ const AllGamesScreen = props => {
     const renderGridItem = (itemData) => {
         return <GamesGridTile 
         title = {itemData.item.title}
+        matches = {itemData.item.matches}
+        series = {itemData.item.series}
         curr = {itemData.item.curr}
         max = {itemData.item.max}
-        closesAt = {itemData.item.closesAt}
+        closeDisplay = {itemData.item.closeDisplay}
         onSelect = {() => {
             props.navigation.navigate({ routeName: 'Game' })
         }}/>
