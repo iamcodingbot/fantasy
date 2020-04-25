@@ -6,16 +6,16 @@ import * as gamesAction from '../../store/actions/selectedplayers';
 
 
 const SubmitTeamScreen = props => {
-    const gameid = props.navigation.getParam('gameid');
+    const gameId = props.navigation.getParam('gameid');
     const dispatch = useDispatch();
 
 
     const selectedplayers = useSelector(state => {
         const players = [];
-        for(const key in state.selectedplayers.selectedPlayers) {
-            const p = state.selectedplayers.selectedPlayers[key];
-            if(p.gameId == gameid)
-                players.push(p);
+        const playersMap = state.selectedplayers.selectedGamePlayersMap[gameId];
+        for(const key in playersMap) {
+            const p = playersMap[key];
+            players.push(p);
         }
         return players;
     });
@@ -32,7 +32,7 @@ const SubmitTeamScreen = props => {
         // submit to blockchain
         // remove from redux
         // add to redix
-        dispatch(gamesAction.deletePlayers(gameid));
+        dispatch(gamesAction.deletePlayers(gameId));
         console.log("submitted")
     }
     return (

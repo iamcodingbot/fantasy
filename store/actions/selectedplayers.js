@@ -6,6 +6,6 @@ export const selectPlayer = player => {
     return {type: SELECT_PLAYER, player: player};
 };
 
-export const deletePlayers = gameid => {
-    return {type: DELETE_PLAYERS, gameid: gameid}
+export const deletePlayers = gameId => {
+    return {type: DELETE_PLAYERS, gameId: gameId}
 };
