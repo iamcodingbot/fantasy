@@ -1,6 +1,8 @@
 import SelectedPlayer from '../../models/userselection'
 import {SELECT_PLAYER} from '../actions/selectedplayers'
+import {DELETE_PLAYERS} from '../actions/selectedplayers'
 
+// fix teamcost
 const initialState = {
     selectedPlayers: {},
     teamcost: 0
@@ -12,7 +14,6 @@ const selectedPlayersReducer = (state = initialState, action) => {
             
             const selectedPlayer = action.player
             if(state.selectedPlayers[selectedPlayer.playerId]){
-                console.log("old")
                 const updatedSelectedPlayer = new SelectedPlayer(
                     selectedPlayer.playerId,
                     selectedPlayer.gameId,
@@ -39,7 +40,6 @@ const selectedPlayersReducer = (state = initialState, action) => {
                     teamcost: state.teamcost + selectedPlayer.cost
                 }
             } else {
-                console.log("new")
                 const newSelectedPlayer = new SelectedPlayer(
                     selectedPlayer.playerId,
                     selectedPlayer.gameId,
@@ -62,6 +62,20 @@ const selectedPlayersReducer = (state = initialState, action) => {
                     teamcost: state.teamcost + selectedPlayer.cost
                 }
             }
+        case DELETE_PLAYERS:
+            const gameid = action.gameid 
+            const restOfPlayers = {}
+            for(const key in state.selectedPlayers){
+                const p = state.selectedPlayers[key]
+                if(p.gameId!=gameid) {
+                    restOfPlayers = {...restOfPlayers, [p.playerId]: p}
+                }
+            }
+            return{
+                ...state,
+                    selectedPlayers: restOfPlayers,
+                    teamcost: state.teamcost
+            }  
     }
     return state;
 }

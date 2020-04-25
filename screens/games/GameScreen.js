@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 
 import {useSelector, useDispatch} from 'react-redux';
 import PlayersGridTile from '../../components/PlayersGridTile'
@@ -40,11 +40,13 @@ const GameScreen = props => {
     };
 
     return (
+        <View>
         <FlatList
             keyExtractor={(item, index) => item.playerId}
             numColumns={3}
             data={players}
             renderItem={renderGridItem} />
+         </View>   
     );
 };
 
