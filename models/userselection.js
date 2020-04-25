@@ -1,5 +1,5 @@
-class Player{
-    constructor(playerId, gameId, firstname, lastname, isBat, isBowl, isWk, isAr, teamId, teamname, color, cost){
+class SelectedPlayer{
+    constructor(playerId, gameId, firstname, lastname, isBat, isBowl, isWk, isAr, teamId, teamname, color, cost, count, totalcost){
         this.playerId = playerId;
         this.gameId = gameId;
         this.firstname = firstname;
@@ -12,7 +12,9 @@ class Player{
         this.teamname = teamname;
         this.color = color;
         this.cost = cost;
+        this.count = count;
+        this.totalcost = totalcost;
     }
 }
 
-export default Player; 
+export default SelectedPlayer; 

@@ -16,7 +16,9 @@ const AllGamesScreen = props => {
         max = {itemData.item.max}
         closeDisplay = {itemData.item.closeDisplay}
         onSelect = {() => {
-            props.navigation.navigate({ routeName: 'Game' })
+            props.navigation.navigate({ routeName: 'Game', params:{
+                gameid: itemData.item.id
+            } })
         }}/>
     };
     return (

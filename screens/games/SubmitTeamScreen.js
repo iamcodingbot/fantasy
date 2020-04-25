@@ -1,11 +1,30 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
+import PlayersGridTile from '../../components/PlayersGridTile'
 
 const SubmitTeamScreen = props => {
-    return(
-        <View style={styles.screen}>
-            <Text>Submit Team Screen</Text>
-        </View>
+    const selectedplayers = useSelector(state => {
+        const players = [];
+        for(const key in state.selectedplayers.selectedPlayers) {
+            players.push(state.selectedplayers.selectedPlayers[key]);
+        }
+        return players;
+    });
+    const renderGridItem = (itemData) => {
+    return <PlayersGridTile
+                firstname={itemData.item.firstname}
+                lastname={itemData.item.lastname}
+                teamcolor={itemData.item.color}
+                cost={itemData.item.cost}
+                />
+    };
+    return (
+        <FlatList
+            keyExtractor={(item, index) => item.playerId}
+            numColumns={3}
+            data={selectedplayers}
+            renderItem={renderGridItem} />
     );
 };
 

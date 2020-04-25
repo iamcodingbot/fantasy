@@ -1,4 +1,4 @@
-import GAMES from '../../data/dummy-data'
+import GAMES from '../../data/games'
 
 const initialState = {
     games: GAMES

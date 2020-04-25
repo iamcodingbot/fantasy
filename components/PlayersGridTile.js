@@ -1,15 +1,15 @@
 import React from 'react';
 import { TouchableOpacity, Text, View , StyleSheet} from 'react-native';
 
-const GamesGridTile = props => {
+const PlayersGridTile = props => {
     return (<TouchableOpacity style={styles.grid} onPress={props.onSelect}>
         <View style= {styles.outercontainer2}>
-        <View style= {styles.outercontainer}>
-        <View style={styles.container}>
-            <Text>{props.title}</Text>
-            <Text>{props.matches}, {props.series}</Text>
-            <Text>Participants {props.curr}/{props.max}</Text>
-            <Text>{props.closeDisplay}</Text>
+        <View style={{...styles.outercontainer, ...{borderColor: props.teamcolor}}}>
+        <View style={{...styles.container, ...{borderColor: props.teamcolor}}}>
+            <Text>{props.firstname}</Text>
+            <Text>{props.lastname}</Text>
+            <Text>{props.cost}</Text>
+            <Text>{props.color}</Text>
         </View>
         </View>
         </View>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         padding: 1,
         paddingVertical: 1,
         borderRadius: 12,
-        borderColor: 'green',borderWidth:1
+        borderWidth:1
     },
     grid: {
         flex: 1,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex:1,
-        backgroundColor: 'white',borderColor: '#ECBD63',borderWidth:1,
+        backgroundColor: 'white',borderWidth:1,
         alignItems: 'stretch',
         
         padding: 20,
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default GamesGridTile;
+export default PlayersGridTile;

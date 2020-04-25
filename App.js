@@ -6,9 +6,13 @@ import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 
 import gamesReducer from './store/reducers/games';
+import playersReducer from './store/reducers/players';
+import selectedplayersReducer from './store/reducers/selectedplayers';
 
 const rootReducer = combineReducers({
-  games: gamesReducer
+  games: gamesReducer,
+  players: playersReducer,
+  selectedplayers: selectedplayersReducer
 });
 
 const store = createStore(rootReducer);
