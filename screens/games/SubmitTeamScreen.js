@@ -4,10 +4,13 @@ import {useSelector} from 'react-redux';
 import PlayersGridTile from '../../components/PlayersGridTile'
 
 const SubmitTeamScreen = props => {
+    const gameid = props.navigation.getParam('gameid');
     const selectedplayers = useSelector(state => {
         const players = [];
         for(const key in state.selectedplayers.selectedPlayers) {
-            players.push(state.selectedplayers.selectedPlayers[key]);
+            const p = state.selectedplayers.selectedPlayers[key];
+            if(p.gameId == gameid)
+                players.push(p);
         }
         return players;
     });

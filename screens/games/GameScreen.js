@@ -9,6 +9,21 @@ import * as gamesAction from '../../store/actions/selectedplayers';
 
 const GameScreen = props => {
     const gameid = props.navigation.getParam('gameid');
+    GameScreen.navigationOptions = navdata => {
+        return  {
+            headerTitle: 'game desc',
+            headerRight:()=> <HeaderButtons HeaderButtonComponent = {HeaderButton}>
+                <Item title='squad' 
+                onPress= {() => {
+                    navdata.navigation.navigate({ routeName: 'SubmitTeam', params:{
+                        gameid: gameid
+                    }})
+                }}/>
+            </HeaderButtons>
+        }
+    };
+
+    
     const playersMap = useSelector(state => state.players.players);
     const players = playersMap[gameid];
     const dispatch = useDispatch();
@@ -41,16 +56,6 @@ const styles = StyleSheet.create({
     }
 });
 
-GameScreen.navigationOptions = navdata => {
-    return  {
-        headerTitle: 'game desc',
-        headerRight:()=> <HeaderButtons HeaderButtonComponent = {HeaderButton}>
-            <Item title='Cart' 
-            onPress= {() => {
-                navdata.navigation.navigate({ routeName: 'SubmitTeam' })
-            }}/>
-        </HeaderButtons>
-    }
-};
+
 
 export default GameScreen;
