@@ -1,18 +1,31 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import HeaderButton from '../../components/HeaderButton'
+import { StyleSheet, FlatList } from 'react-native';
+
+import GamesGridTile from '../../components/GamesGridTile';
+
+import {useSelector} from 'react-redux';
 
 const PredictionScreen = props => {
-    return(
-        <View style={styles.screen}>
-            <Text>Prediction Screen</Text>
-        </View>
+    const games = useSelector(state => state.games.games);
+    const renderGridItem = (itemData) => {
+        return <GamesGridTile 
+        title = {itemData.item.title}
+        matches = {itemData.item.matches}
+        series = {itemData.item.series}
+        curr = {itemData.item.curr}
+        max = {itemData.item.max}
+        closeDisplay = {itemData.item.closeDisplay}/>
+    };
+    return (
+        <FlatList
+            keyExtractor={(item, index) => item.id}
+            data={games}
+            renderItem={renderGridItem} />
     );
 };
 
-PredictionScreen.navigationOptions =  {
-    headerTitle: 'Predictions'
+PredictionScreen.navigationOptions = {
+    headerTitle: 'All Predictions'
 };
 
 const styles = StyleSheet.create({

@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, FlatList, StyleSheet, Button} from 'react-native';
+import {View, FlatList, StyleSheet, Text} from 'react-native';
 
 import {useSelector, useDispatch} from 'react-redux';
 import PlayersGridTile from '../../components/PlayersGridTile'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import HeaderButton from '../../components/HeaderButton'
 import * as gamesAction from '../../store/actions/selectedplayers';
+
 
 const GameScreen = props => {
     const gameid = props.navigation.getParam('gameid');
@@ -25,7 +26,8 @@ const GameScreen = props => {
 
     
     const playersMap = useSelector(state => state.players.players);
-    const players = playersMap[gameid];
+    const selectedPlayersMap = useSelector(state => state.selectedplayers.selectedGamePlayersMap[gameid]);
+    const players = playersMap[gameid]
     const dispatch = useDispatch();
     const renderGridItem = (itemData) => {
     return <PlayersGridTile
@@ -33,10 +35,20 @@ const GameScreen = props => {
                 lastname={itemData.item.lastname}
                 teamcolor={itemData.item.color}
                 cost={itemData.item.cost}
-                onSelect = {() => {
+                playerId={itemData.item.playerId}
+                gameId ={gameid}
+                
+                onPick = {() => {
                     dispatch(gamesAction.selectPlayer(itemData.item));
                 }}
-                />
+                onDrop = {() => {
+                    if(selectedPlayersMap[itemData.item.playerId]) {
+                        dispatch(gamesAction.dropPlayer(selectedPlayersMap[itemData.item.playerId]));
+                    }
+                    
+                    
+                }}
+            />
     };
 
     return (

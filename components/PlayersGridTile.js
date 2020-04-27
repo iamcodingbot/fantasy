@@ -1,62 +1,66 @@
 import React from 'react';
-import { TouchableOpacity, Text, View , StyleSheet} from 'react-native';
+import { TouchableOpacity, Text, View , StyleSheet, Button} from 'react-native';
+import PlayerCounter from './PlayerCounter'; 
+import {useSelector} from 'react-redux';
+
 
 const PlayersGridTile = props => {
-    return (<TouchableOpacity style={styles.grid} onPress={props.onSelect}>
-        <View style= {styles.outercontainer2}>
-        <View style={{...styles.outercontainer, ...{borderColor: props.teamcolor}}}>
+    const count = useSelector(state => {
+        if(props.gameId in state.selectedplayers.selectedGamePlayersMap) {
+            const playerMap = state.selectedplayers.selectedGamePlayersMap[props.gameId]
+            if(props.playerId in playerMap){
+                console.log(playerMap[props.playerId].lastname)
+                console.log(playerMap[props.playerId].count)
+                return playerMap[props.playerId].count
+            } else {
+                return 0
+            }
+        } else {
+            return 0
+        }
+
+
+    });
+    return (<TouchableOpacity style={styles.grid} >
+
         <View style={{...styles.container, ...{borderColor: props.teamcolor}}}>
-            <Text>{props.firstname}</Text>
-            <Text>{props.lastname}</Text>
-            <Text>{props.cost}</Text>
-            <Text>{props.color}</Text>
+            <View style = {styles.statscontainer}>
+                <View style ={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                    <Text>{props.firstname}</Text>
+                    <PlayerCounter title = {count}/>
+                </View>
+                <Text>{props.lastname}</Text>
+            </View>
+            <View style = {styles.statscontainer} ><Text>{props.cost} FAN</Text></View>
+            
+            <View style ={{flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                <View style ={{flex:1}}><Button title = '+' onPress ={props.onPick}/></View>
+                <View style ={{flex:1}}><Button title = '-' onPress ={props.onDrop}/></View>
+                
+            </View>
         </View>
-        </View>
-        </View>
+
         
     </TouchableOpacity>);
 };
 
 const styles = StyleSheet.create({
-    outercontainer2: {
-        flex:1,
-        height: 150,
-        alignItems: 'stretch',
-        backgroundColor: 'white',
-        padding: 2,
-        paddingVertical: 2,
-        borderRadius: 10,
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 2},
-        shadowOpacity: '',
-        shadowRadius: 6,
-        shadowOpacity: 0.26,
-        backgroundColor: 'white',
-        elevation: 5,
-    },
-    outercontainer: {
-        flex:1,
-        height: 150,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-        padding: 1,
-        paddingVertical: 1,
-        borderRadius: 12,
-        borderWidth:1
-    },
     grid: {
         flex: 1,
         margin: 8,
-        height: 150
+        height: 150,
+        
     },
     container: {
         flex:1,
         backgroundColor: 'white',borderWidth:1,
-        alignItems: 'stretch',
-        
-        padding: 20,
-        borderRadius: 10
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        margin: 5,
+        borderRadius: 8
+    },
+    statscontainer: {
+        margin: 5
     }
 });
 

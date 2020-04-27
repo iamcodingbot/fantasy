@@ -31,7 +31,7 @@ const AllGamesScreen = props => {
 };
 
 AllGamesScreen.navigationOptions = {
-    headerTitle: 'All Games'
+    headerTitle: ' '
 };
 
 const styles = StyleSheet.create({
