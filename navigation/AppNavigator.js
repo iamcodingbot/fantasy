@@ -46,8 +46,8 @@ const SettingsNavigator = createStackNavigator({
 
 
 const MainTabNavigator = createBottomTabNavigator({
-    Games: GamesNavigator,
     Predictions: PredictionNavigator,
+    Games: GamesNavigator,
     MyArena: MyArenaNavigator,
     Settings: SettingsNavigator
 });
