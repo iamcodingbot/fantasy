@@ -112,14 +112,10 @@ const selectedPlayersReducer = (state = initialState, action) => {
                             return{
                                 ...state,
                                 selectedGamePlayersMap: {...state.selectedGamePlayersMap, 
-                                    [gameId]: rest},
+                                    [player.gameId]: rest},
                                     teamcost: state.teamcost
                             }
                         } else {
-                            console.log("prev state")
-                            console.log(state.selectedGamePlayersMap)
-                            console.log("spread state")
-                            console.log(rest)
                             const updatedSelectedPlayer = new SelectedPlayer(
                                 player.playerId,
                                 player.gameId,
@@ -136,12 +132,10 @@ const selectedPlayersReducer = (state = initialState, action) => {
                                 player.count - 1,
                                 player.totalcost - player.cost
                             );
-                            console.log("new player")
-                            console.log(updatedSelectedPlayer)
                             return{
                                 ...state,
                                 selectedGamePlayersMap: {...state.selectedGamePlayersMap, 
-                                    [gameId]: {...rest,  [dropplayerId] : updatedSelectedPlayer }},
+                                    [player.gameId]: {...rest,  [dropplayerId] : updatedSelectedPlayer }},
                                     teamcost: state.teamcost
                             } 
                         } 

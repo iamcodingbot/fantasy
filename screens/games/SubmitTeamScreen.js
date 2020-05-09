@@ -32,7 +32,7 @@ const SubmitTeamScreen = props => {
         // submit to blockchain
         // remove from redux
         // add to redix
-        dispatch(gamesAction.deletePlayers(gameId));
+        dispatch(gamesAction.deletePlayers(gameId, selectedplayers));
         console.log("submitted")
     }
     return (

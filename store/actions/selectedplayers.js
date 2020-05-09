@@ -11,6 +11,23 @@ export const dropPlayer = player => {
     return {type: DROP_PLAYER, player: player};
 };
 
-export const deletePlayers = gameId => {
-    return {type: DELETE_PLAYERS, gameId: gameId}
+export const deletePlayers = (gameId, selectedplayers) => {
+    return async dispatch => {
+        
+        const response = await fetch('https://fantasy-c2702.firebaseio.com/selectedplayers.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'user':'fantasy1',
+                'event_id':gameId,
+                selectedplayers
+            })
+        });
+        const resData = await response.json();
+        console.log(resData);
+        dispatch({type: DELETE_PLAYERS, gameId: gameId})
+    };
+   
 };
