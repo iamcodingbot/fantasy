@@ -18,7 +18,7 @@ const PredictionScreen = props => {
     };
     return (
         <FlatList
-            keyExtractor={(item, index) => item.id}
+            keyExtractor={(item, index) => item.id+''}
             data={games}
             renderItem={renderGridItem} />
     );

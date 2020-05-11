@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import {View, FlatList, StyleSheet, Text, Modal} from 'react-native';
+import {View, FlatList, StyleSheet, Text, Modal, Button, ScrollView} from 'react-native';
+import { AntDesign} from '@expo/vector-icons';
+import { withBadge , Badge} from 'react-native-elements' ;
+import ProgressCircle from 'react-native-progress-circle'
+
 
 import {useSelector, useDispatch} from 'react-redux';
 import PlayersGridTile from '../../components/PlayersGridTile'
@@ -10,6 +14,11 @@ import * as Progress from 'react-native-progress';
 import { TouchableOpacity , TouchableHighlight} from 'react-native-gesture-handler';
 import PlayerContraintsModal from '../../components/PlayerConstraintsModal';
 import Animated from 'react-native-reanimated';
+import GameConstraints from '../../components/GameConstraints';
+import GameConstraint from '../../models/gameconstraint';
+import SingleConstraint from '../../models/singleconstraint';
+import {Icon} from 'native-base';
+import PlayerCounter from '../../components/PlayerCounter';
 
 
 const GameScreen = props => {
@@ -19,7 +28,7 @@ const GameScreen = props => {
     const maxteam = 7;
     const maxbowl = 7;
     const maxplayers = 11;
-    const maxcost = 100;
+    const maxcost = 150;
     let totalbat = 0;
     let totalbowl = 0;
     let totalcost = 0;
@@ -141,24 +150,101 @@ const GameScreen = props => {
                 }}
             />
     };
+    var availableBat ;
+    if((maxbat - totalbat)>(11-(totalteam1+totalteam2))) {
+        availableBat=11-(totalteam1+totalteam2)
+    } else {
+        availableBat=maxbat - totalbat;
+    }
+    var availableBowl ;
+    if((maxbowl - totalbowl)>(11-(totalteam1+totalteam2))) {
+        availableBowl=11-(totalteam1+totalteam2)
+    } else {
+        availableBowl=maxbowl - totalbowl;
+    }
+    var availableTeam1 ;
+    if((maxteam - totalteam1)>(11-(totalteam1+totalteam2))) {
+        availableTeam1=11-(totalteam1+totalteam2)
+    } else {
+        availableTeam1=maxteam - totalteam1;
+    }
+    var availableTeam2 ;
+    if((maxteam - totalteam2)>(11-(totalteam1+totalteam2))) {
+        availableTeam2=11-(totalteam1+totalteam2)
+    } else {
+        availableTeam2=maxteam - totalteam2;
+    }
+    const bowlconstraint = new SingleConstraint("2", "bowl", totalbowl, maxbowl, '#AA7C77', 'white', 12);
+    const team1constraint = new SingleConstraint("4", "team1", totalteam1, maxteam, '#EDF72A', 'white',6);
+    const team2constraint = new SingleConstraint("5", "team2", totalteam2, maxteam, '#9A1D1D', 'white',6);
+    const totalteamconstraint = new SingleConstraint("3", "team2", totalteam1 + totalteam2, 11, '#1CE3CE', 'white',12);
 
+    const MessagesBadge = withBadge(5, {color: 'green'})(Icon)
+    const gameConstraints = [team1constraint, team2constraint, bowlconstraint, totalteamconstraint];
     return (<View>
-        <PlayerContraintsModal  currbat={currbat} onClose = {() => {
-                setModalVisible(false);
-              }} modalVisible = {isVisible}/>
-                  <TouchableOpacity onPress={() => {
-                setModalVisible(true);
-                }}>
-
-<Progress.Bar progress={currteam1} width={400} borderRadius = {0} borderColor = 'black' color = 'yellow' borderWidth = {2} height = {6}/>
-        <Progress.Bar progress={currteam2} width={400} borderRadius = {0} borderColor = 'black' color = '#9A1D1D' borderWidth = {1} height = {6}/>
-            <Progress.Bar progress={currbowl} width={400} borderRadius = {0} borderColor = 'black' borderWidth = {1} height = {12}/>
-        <Progress.Bar progress={currbat} width={400} borderRadius = {0} borderColor = 'black' color = 'red' borderWidth = {1} height = {12}/>
-
-        <Progress.Bar progress={currcost} width={400} borderRadius = {0} borderColor = 'black' color = 'black' borderWidth = {2} height = {12}/>
-        
-        </TouchableOpacity>         
-               
+        <View flexDirection = 'row' justifyContent = 'space-between' alignItems = 'center' margin = {10}>
+            <View><Text style ={{fontSize:18, fontWeight:'300', color: 'black'}} >LETS SEE WHAT YOU HAVE GOT</Text></View>
+            <View>
+        <ProgressCircle
+            percent={(totalcost*100)/maxcost}
+            radius={50}
+            borderWidth={8}
+            color="#3399FF"
+            shadowColor="white">
+            <Text style={{ fontSize: 10 }}>{totalcost}/{maxcost}</Text>
+        </ProgressCircle>
+        </View>
+        </View>
+        <View>
+        <ScrollView horizontal = {true} >
+            <TouchableOpacity>
+            <View style = {{width: 90}}>
+                <View style = {{paddingBottom :15, justifyContent: 'center',alignItems: 'center', margin: 10}}>  
+                    <AntDesign name='laptop' size = {30}/>
+                    <Badge value={'upto ' +  (11- (totalteam1 + totalteam2))} containerStyle={{ position: 'absolute', top: -5, right: -15 }}/> 
+                    <Text style ={{fontSize:10, fontWeight:'700', color: 'grey'}} >All Players</Text>
+                </View>
+                <View></View>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <View style = {{width: 90}}>
+                <View style = {{paddingBottom :15, justifyContent: 'center',alignItems: 'center', margin: 10}}>
+                    <AntDesign name='staro' size = {30}/>
+                    <Badge  value={'upto ' + availableTeam1} containerStyle={{ position: 'absolute', top: -5, right: -15 }}/> 
+                    <Text style ={{fontSize:10, fontWeight:'700', color: 'grey'}} >Australia</Text>
+                </View>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <View style = {{width: 90}}>
+                <View style = {{paddingBottom :15, justifyContent: 'center',alignItems: 'center', margin: 10}}>
+                    <AntDesign name='home' size = {30}/>
+                    <Badge value={'upto ' + availableTeam2} containerStyle={{ position: 'absolute', top: -5, right: -15 }}/> 
+                    <Text style ={{fontSize:10, fontWeight:'700', color: 'grey'}} >West Indies</Text>
+                </View>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <View style = {{width: 100}}>
+                <View style = {{paddingBottom :15, justifyContent: 'center',alignItems: 'center', margin: 10}}>
+                    <AntDesign name='filter' size = {30}/>
+                    <Badge value={'upto ' + availableBat} containerStyle={{ position: 'absolute', top: -5, right: -15 }}/> 
+                    <Text style ={{fontSize:10, fontWeight:'700', color: 'grey'}} >Batsmen</Text>
+                </View>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <View style = {{width: 90}}>
+                <View style = {{paddingBottom :15, justifyContent: 'center',alignItems: 'center', margin: 10}}>
+                    <AntDesign name='meh' size = {30}/>
+                    <Badge value={'upto ' + availableBowl} containerStyle={{ position: 'absolute', top: -5, right: -15 }}/> 
+                    <Text style ={{fontSize:10, fontWeight:'700', color: 'grey'}} >Bowler</Text>
+                </View>
+            </View>
+            </TouchableOpacity>
+        </ScrollView>        
+        </View>   
         <FlatList
             keyExtractor={(item, index) => item.playerId}
             numColumns={3}

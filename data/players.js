@@ -20,16 +20,16 @@ const INDPAKPLAYERS = [
 const AUSWIPLAYERS = [
     new Player(21, 2, 'David', 'Warner', true, false, false, false, 1, 'Aus', '#EDF72A', 10),
     new Player(22, 2, 'Brian', 'Lara', true, false, false, false, 2, 'WI', '#9A1D1D', 20),
-    new Player(23, 2, 'Adam', 'Gilchrist', true, true, false, true, 1, 'Aus', '#EDF72A', 25),
+    new Player(23, 2, 'Adam', 'Gilchrist', true, false, false, true, 1, 'Aus', '#EDF72A', 25),
     new Player(24, 2, 'Glenn', 'McGrath', false, true, false, false, 1, 'Aus', '#EDF72A', 13),
-    new Player(25, 2, 'Courtey', 'Walsh', true, false, true, false, 2, 'WI', '#9A1D1D',22),
+    new Player(25, 2, 'Courtey', 'Walsh', false, true, true, false, 2, 'WI', '#9A1D1D',22),
     new Player(26, 2, 'Ricardo', 'Powell', true, false, false, false, 2, 'WI', '#9A1D1D', 17),
-    new Player(27, 2, 'Mark', 'Waugh', false, true, false, false, 1, 'Aus', '#EDF72A', 20),
+    new Player(27, 2, 'Mark', 'Waugh', true, false, false, false, 1, 'Aus', '#EDF72A', 20),
     new Player(28, 2, 'David', 'Warner', true, false, false, false, 1, 'Aus', '#EDF72A', 10),
     new Player(29, 2, 'Brian', 'Lara', true, false, false, false, 2, 'WI', '#9A1D1D', 20),
     new Player(30, 2, 'Adam', 'Gilchrist', true, true, false, true, 1, 'Aus', '#EDF72A', 25),
     new Player(31, 2, 'Glenn', 'McGrath', false, true, false, false, 1, 'Aus', '#EDF72A', 13),
-    new Player(32, 2, 'Courtey', 'Walsh', true, false, true, false, 2, 'WI', '#9A1D1D',22),
+    new Player(32, 2, 'Courtey', 'Walsh', false, true, true, false, 2, 'WI', '#9A1D1D',22),
     new Player(33, 2, 'Ricardo', 'Powell', true, false, false, false, 2, 'WI', '#9A1D1D', 17),
 ];
 
