@@ -1,50 +1,22 @@
 import React from 'react';
 import { TouchableOpacity, Text, View , StyleSheet} from 'react-native';
+import Colors from '../constants/colors';
 
 const GamesGridTile = props => {
     return (<TouchableOpacity style={styles.grid} onPress={props.onSelect}>
-        <View style= {styles.outercontainer2}>
-        <View style= {styles.outercontainer}>
+
         <View style={styles.container}>
-            <Text>{props.title}</Text>
-            <Text>{props.matches}, {props.series}</Text>
-            <Text>Participants {props.curr}/{props.max}</Text>
-            <Text>{props.closeDisplay}</Text>
-        </View>
-        </View>
+            <Text style={{fontSize: 15,fontWeight: "bold", color: 'white'}}>{props.title}</Text>
+            <Text style={{fontSize: 12, color: 'white'}}>{props.matches}, {props.series}</Text>
+            <Text style={{fontSize: 12, color: 'white'}}>Participants {props.curr}/{props.max}</Text>
+            <Text style={{fontSize: 12, color: 'white'}}>{props.closeDisplay}</Text>
         </View>
         
     </TouchableOpacity>);
 };
 
 const styles = StyleSheet.create({
-    outercontainer2: {
-        flex:1,
-        height: 150,
-        alignItems: 'stretch',
-        backgroundColor: 'white',
-        padding: 1,
-        paddingVertical: 1,
-        borderRadius: 12,
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 2},
-        shadowOpacity: '',
-        shadowRadius: 6,
-        shadowOpacity: 0.26,
-        backgroundColor: 'white',
-        elevation: 5,
-    },
-    outercontainer: {
-        flex:1,
-        height: 150,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-        padding: 1,
-        paddingVertical: 1,
-        borderRadius: 12,
-        borderColor: 'green',borderWidth:1
-    },
+    
     grid: {
         flex: 1,
         margin: 8,
@@ -52,7 +24,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex:1,
-        backgroundColor: 'white',borderColor: '#ECBD63',borderWidth:1,
+        backgroundColor: Colors.gridTileColor,borderColor: '#FFFF00',borderWidth:0,
         alignItems: 'stretch',
         
         padding: 20,

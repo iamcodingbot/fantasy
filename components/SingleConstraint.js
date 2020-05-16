@@ -24,7 +24,6 @@ const SingleConstraint = props =>{
     for(var i = filled-1 ; i<= filled + unfilled-1; i++) {
         currentstate.push(new ConstraintHelper(i+"", false));
     }
-    console.log(currentstate)
     const renderItem = (itemData) => {
             if(itemData.item.status == true) {
                 return (<View style = {{...styles.filled, ...{backgroundColor: filledColor}}}><Text></Text></View>);

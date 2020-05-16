@@ -1,7 +1,7 @@
 class ConstraintHelper {
     constructor(key, status) {
         this.key =key;
-this.status =  status;
+        this.status =  status;
     }
 }
 

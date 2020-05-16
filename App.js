@@ -8,12 +8,10 @@ import ReduxThunk from 'redux-thunk';
 
 import gamesReducer from './store/reducers/games';
 import playersReducer from './store/reducers/players';
-import selectedplayersReducer from './store/reducers/selectedplayers';
 
 const rootReducer = combineReducers({
   games: gamesReducer,
-  players: playersReducer,
-  selectedplayers: selectedplayersReducer
+  players: playersReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

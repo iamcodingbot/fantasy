@@ -21,6 +21,8 @@ const GamesNavigator = createStackNavigator({
     AllGames: AllGamesScreen,
     Game: GameScreen,
     SubmitTeam: SubmitTeamScreen
+}, {defaultNavigationOptions : {
+    headerTransparent: true, headerStatusBarHeight: 50}
 });
 
 
